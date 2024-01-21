@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -16,25 +15,30 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 
+import com.java.database.DataModel;
+import com.java.database.JDBCHelper;
+
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AddPassword extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private static DisposeHandler dispose_after;
 
-	public static void main(String[] args) {
+	public static void startAddPasswordScreen(DisposeHandler dispose_after) {
+		AddPassword.dispose_after = dispose_after;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -47,7 +51,7 @@ public class AddPassword extends JFrame {
 		});
 	}
 
-	public AddPassword() {
+	private AddPassword() {
 		ImageIcon appIcon = loadImageIcon("/app_icon.png");
 		ImageIcon backArrow = loadImageIcon("/back_icon.png");
 
@@ -68,6 +72,12 @@ public class AddPassword extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 		JButton sampleButton = new JButton();
+		sampleButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				closeWindow();
+			}
+		});
 		sampleButton.setBackground(new Color(11, 28, 53));
 		sampleButton
 				.setIcon(new ImageIcon(backArrow.getImage().getScaledInstance(50, 50, BufferedImage.TYPE_INT_ARGB)));
@@ -84,6 +94,12 @@ public class AddPassword extends JFrame {
 		topPanel.add(sampleButton);
 
 		JLabel backNavigationLabel = new JLabel("Back");
+		backNavigationLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				closeWindow();
+			}
+		});
 		backNavigationLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
 		backNavigationLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
 		backNavigationLabel.setForeground(Color.WHITE);
@@ -128,6 +144,7 @@ public class AddPassword extends JFrame {
 		JTextField websiteUserName = new JTextField("Enter the Website Username");
 		websiteUserName.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		JButton saveButton = new JButton("Save");
+
 		saveButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		saveButton.setBackground(new Color(217, 217, 217));
 
@@ -159,27 +176,27 @@ public class AddPassword extends JFrame {
 				contentTextFieldPaddingBase + contentTextFieldPaddingHorizontal);
 		websiteUserNameGridBagConstraints.anchor = GridBagConstraints.PAGE_START;
 		contentPanel.add(websiteUserName, websiteUserNameGridBagConstraints);
-		
 
 		GridBagLayout gbl_passwordPanel = new GridBagLayout();
-		gbl_passwordPanel.columnWidths = new int[]{10, 0};
-		gbl_passwordPanel.rowHeights = new int[]{0, 0};
-		gbl_passwordPanel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_passwordPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_passwordPanel.columnWidths = new int[] { 10, 0 };
+		gbl_passwordPanel.rowHeights = new int[] { 0, 0 };
+		gbl_passwordPanel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_passwordPanel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 
 		JPanel passwordPanel = new JPanel(gbl_passwordPanel);
 
 		GridBagConstraints gbc_passwordPanel = new GridBagConstraints();
 		gbc_passwordPanel.fill = GridBagConstraints.BOTH;
 		gbc_passwordPanel.insets = new Insets(contentTextFieldPaddingBase,
-				contentTextFieldPaddingBase + contentTextFieldPaddingHorizontal, contentTextFieldPaddingBase + contentTextFieldPaddingBottom,
+				contentTextFieldPaddingBase + contentTextFieldPaddingHorizontal,
+				contentTextFieldPaddingBase + contentTextFieldPaddingBottom,
 				contentTextFieldPaddingBase + contentTextFieldPaddingHorizontal);
 		gbc_passwordPanel.gridx = 0;
 		gbc_passwordPanel.gridy = 2;
 		gbc_passwordPanel.weightx = 1.0;
-		gbc_passwordPanel.weighty = 1.0;		
+		gbc_passwordPanel.weighty = 1.0;
 
-		JTextField websiteUserPassword = new JTextField("Enter the Website Password");				
+		JTextField websiteUserPassword = new JTextField("Enter the Website Password");
 		websiteUserPassword.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
 		GridBagConstraints gbc_websiteUserPassword = new GridBagConstraints();
@@ -187,7 +204,7 @@ public class AddPassword extends JFrame {
 		gbc_websiteUserPassword.gridx = 0;
 		gbc_websiteUserPassword.gridy = 0;
 		gbc_websiteUserPassword.weightx = 1.0;
-		gbc_websiteUserPassword.weighty = 1.0;				
+		gbc_websiteUserPassword.weighty = 1.0;
 		passwordPanel.add(websiteUserPassword, gbc_websiteUserPassword);
 
 		contentPanel.add(passwordPanel, gbc_passwordPanel);
@@ -200,6 +217,16 @@ public class AddPassword extends JFrame {
 		saveButtonGridBagConstraints.weighty = 0.5;
 		saveButtonGridBagConstraints.insets = new Insets(10, 200, 10, 200);
 		saveButtonGridBagConstraints.anchor = GridBagConstraints.PAGE_START;
+
+		saveButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JDBCHelper.insert(new DataModel(-1, websiteName.getText(), websiteUserName.getText(),
+						websiteUserPassword.getText()));
+				closeWindow();
+			}
+		});
+
 		contentPanel.add(saveButton, saveButtonGridBagConstraints);
 
 		contentPane.add(contentPanel, contentPanelConstraints);
@@ -207,6 +234,11 @@ public class AddPassword extends JFrame {
 		setContentPane(contentPane);
 	}
 
+	private void closeWindow() {
+		dispose_after.callOnDispose();
+		AddPassword.this.dispose();		
+	}
+	
 	private static ImageIcon loadImageIcon(String path) {
 		URL imageURL = AddPassword.class.getResource(path);
 
