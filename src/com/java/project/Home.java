@@ -17,12 +17,14 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+
 public class Home extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField searchText;
- 
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,6 +38,12 @@ public class Home extends JFrame {
 		});
 	}
 
+	public void navigateToAddPassword() {
+		AddPassword.startAddPasswordScreen(() -> {
+//			System.out.println("Record Entered");
+			Home.this.setVisible(true);
+		});
+	}
 
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +74,8 @@ public class Home extends JFrame {
 		addButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//goes to add password j-frame
+				Home.this.setVisible(false);
+				Home.this.navigateToAddPassword();
 			}
 		});
 		addButton.setBackground(new Color(11, 28, 53));
@@ -84,7 +93,7 @@ public class Home extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// goes to settings page
 			}
-		});		
+		});
 		settingsButton.setBounds(55, 46, 50, 50);
 		settingsButton.setForeground(new Color(0, 0, 0));
 		settingsButton.setBackground(new Color(11, 28, 53));

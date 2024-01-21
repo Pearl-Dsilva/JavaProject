@@ -75,7 +75,7 @@ public class Settings extends JFrame {
 		backLabel.setFont(new Font("Tahoma", Font.BOLD, 48));
 		backLabel.setBounds(165, 46, 150, 100);
 		contentPane.add(backLabel);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBackground(new Color(255, 255, 255));
 		separator.setForeground(new Color(255, 255, 255));
@@ -87,7 +87,7 @@ public class Settings extends JFrame {
 		darkModeLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		darkModeLabel.setBounds(125, 216, 215, 34);
 		contentPane.add(darkModeLabel);
-		
+
 		JToggleButton toggleButton = new JToggleButton();
 		toggleButton.setBounds(1005, 204, 70, 50);
 		toggleButton.setForeground(new Color(0, 0, 0));
@@ -124,79 +124,5 @@ public class Settings extends JFrame {
 			}
 		});
 		contentPane.add(toggleButton);
-
-		
-
 	}
 }
-//import java.awt.Color;
-//import java.awt.EventQueue;
-//import java.awt.Font;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import javax.swing.ImageIcon;
-//import javax.swing.JFrame;
-//import javax.swing.JLabel;
-//import javax.swing.JPanel;
-//import javax.swing.JToggleButton;
-//import javax.swing.SwingConstants;
-//import javax.swing.border.EmptyBorder;
-//import javax.swing.plaf.basic.BasicButtonUI;
-//
-//public class Settings extends JFrame {
-//
-//    private JPanel contentPane;
-//    private JToggleButton toggleButton;
-//    private JLabel label;
-//
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    Settings frame = new Settings();
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-//
-//    public Settings() {
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setBounds(100, 100, 450, 300);
-//        contentPane = new JPanel();
-//        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//        setContentPane(contentPane);
-//        contentPane.setLayout(null);
-//
-//        ImageIcon iconOn = new ImageIcon(getClass().getResource("/toggle-on.png"));
-//        ImageIcon iconOff = new ImageIcon(getClass().getResource("/toggle-off.png"));
-//
-//        toggleButton = new JToggleButton(iconOn);
-//        toggleButton.setBounds(10, 10, 100, 100);
-//        toggleButton.setBorder(new EmptyBorder(0, 0, 0, 0));
-//		toggleButton.setUI(new BasicButtonUI());
-//        contentPane.add(toggleButton);
-//
-//        label = new JLabel("Toggle Switch");
-//        label.setHorizontalAlignment(SwingConstants.CENTER);
-//        label.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//        label.setBounds(10, 70, 414, 50);
-//        contentPane.add(label);
-//
-//        toggleButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                if (toggleButton.isSelected()) {
-//                    contentPane.setBackground(Color.WHITE);
-//                    label.setForeground(Color.WHITE);
-//                    toggleButton.setIcon(iconOff);
-//                } else {
-//                    contentPane.setBackground(null);
-//                    label.setForeground(null);
-//                    toggleButton.setIcon(iconOn);
-//                }
-//            }
-//        });
-//    }
-//}
