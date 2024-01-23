@@ -30,10 +30,8 @@ public class Home extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchText;
 	private JPanel cardsPanel;
-	private static DisposeHandler dispose_after;
 	
-	public static void startAddPasswordScreen(DisposeHandler dispose_after) {
-		Home.dispose_after = dispose_after;
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

@@ -30,6 +30,9 @@ public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -231,7 +234,7 @@ public class Login extends JFrame {
 		String password = jTextField3.getText();
 
 		if (authenticateUser(username, password)) {
-			Home.main(null);
+			Home.main(null);			
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this, "Invalid username or password", "Login Error",
@@ -241,7 +244,8 @@ public class Login extends JFrame {
 
 	private boolean authenticateUser(String username, String password) {
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root", "Zombie@2347245");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root",
+					"root");
 			String query = "SELECT * FROM users_details WHERE username = ? AND password = ?";
 			PreparedStatement pst = conn.prepareStatement(query);
 			pst.setString(1, username);
