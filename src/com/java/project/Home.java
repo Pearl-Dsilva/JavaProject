@@ -30,8 +30,10 @@ public class Home extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchText;
 	private JPanel cardsPanel;
-
-	public static void main(String[] args) {
+	private static DisposeHandler dispose_after;
+	
+	public static void startAddPasswordScreen(DisposeHandler dispose_after) {
+		Home.dispose_after = dispose_after;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -77,6 +79,13 @@ public class Home extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton searchButton = new JButton("Search");
+		searchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (searchText.getText() != "")
+					filter(searchText.getText(), cardsPanel);
+			}
+		});
 		searchButton.setBounds(880, 105, 80, 35);
 		searchButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		searchButton.setForeground(Color.WHITE);
@@ -213,9 +222,16 @@ public class Home extends JFrame {
 
 	private void initialLoad(JPanel panel) {
 		ArrayList<DataModel> data = JDBCHelper.read();
-		System.out.println(data.size());
 		data.forEach((item) -> {
-			addPasswordEntry(cardsPanel, item);
+			addPasswordEntry(panel, item);
+		});
+	}
+
+	private void filter(String websiteName, JPanel panel) {
+		ArrayList<DataModel> data = JDBCHelper.read(websiteName);
+		cardsPanel.removeAll();
+		data.forEach((item) -> {
+			addPasswordEntry(panel, item);
 		});
 	}
 

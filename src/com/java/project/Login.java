@@ -150,11 +150,6 @@ public class Login extends JFrame {
 		jButton2.setFont(new Font("Tahoma", 0, 12));
 		jButton2.setForeground(new Color(0, 153, 51));
 		jButton2.setText("Sign up");
-//        jButton2.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                jButton2ActionPerformed(e);
-//            }
-//        });
 
 		GroupLayout leftLayout = new GroupLayout(left);
 		left.setLayout(leftLayout);
@@ -236,10 +231,9 @@ public class Login extends JFrame {
 		String password = jTextField3.getText();
 
 		if (authenticateUser(username, password)) {
-			Home mainApp = new Home();
-			mainApp.setVisible(true);
-			mainApp.pack();
-			mainApp.setLocationRelativeTo(null);
+			Home.startAddPasswordScreen(() -> {
+				Login.this.setVisible(true);
+			});
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this, "Invalid username or password", "Login Error",

@@ -42,6 +42,30 @@ public class JDBCHelper {
 		return results;
 	}
 
+	public static ArrayList<DataModel> read(String query) {
+		final String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE url LIKE '%" + query + "%'";
+		ArrayList<DataModel> results = new ArrayList<>();
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				ResultSet rs = conn.createStatement().executeQuery(QUERY)) {
+
+			while (rs.next()) {
+				try {
+					String decryptedPassword = new Encryption().decrypt(rs.getString("password"));
+					DataModel dataModel = new DataModel(rs.getInt("id"), rs.getString("url"), rs.getString("username"),
+							decryptedPassword);
+
+					results.add(dataModel);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
 	public static int update(DataModel dataModel) {
 		int rowsUpdated = 0;
 		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
