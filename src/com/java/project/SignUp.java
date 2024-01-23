@@ -238,7 +238,7 @@ public class SignUp extends JFrame {
 
 	private boolean createUser(String username, String password) {
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/User", "root", "64152737");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root", "Zombie@2347245");
 			String query = "INSERT INTO users_details (username, password) VALUES (?, ?)";
 			PreparedStatement pst = conn.prepareStatement(query);
 			pst.setString(1, username);

@@ -40,7 +40,6 @@ public class Home extends JFrame {
 
 	public void navigateToAddPassword() {
 		AddPassword.startAddPasswordScreen(() -> {
-//			System.out.println("Record Entered");
 			Home.this.setVisible(true);
 		});
 	}
@@ -52,7 +51,6 @@ public class Home extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(11, 28, 53));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		/////////// card logic///////
 		ExpandableCard expandableCard = new ExpandableCard("Website  Username", "actual data goes here");
 		expandableCard.setForeground(new Color(11, 28, 53));
 		expandableCard.setBackground(new Color(11, 28, 53));
@@ -197,4 +195,7 @@ class ExpandableCard extends JPanel {
 	private void toggleContent() {
 		contentPanel.setVisible(!contentPanel.isVisible());
 	}
+	
+	
+	
 }

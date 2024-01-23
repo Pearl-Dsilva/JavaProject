@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,7 +56,9 @@ public class Settings extends JFrame {
 		settingsButton.setBounds(55, 46, 100, 100);
 		settingsButton.setForeground(new Color(0, 0, 0));
 		settingsButton.setBackground(new Color(11, 28, 53));
-		Image settings_img = new ImageIcon(this.getClass().getResource("/back.png")).getImage().getScaledInstance(100,
+		Image settings_img = new ImageIcon(this.getClass().getResource("/back_icon.png")).getImage().getScaledInstance(100,
+				100, DO_NOTHING_ON_CLOSE);
+		Image settings_img_dark = new ImageIcon(this.getClass().getResource("/back_dark.png")).getImage().getScaledInstance(100,
 				100, DO_NOTHING_ON_CLOSE);
 		settingsButton.setIcon(new ImageIcon(settings_img));
 		settingsButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -110,9 +111,11 @@ public class Settings extends JFrame {
 					darkModeLabel.setForeground(new Color(11, 28, 53));
 					separator.setForeground(new Color(11, 28, 53));
 					toggleButton.setIcon(new ImageIcon(toggle_off_img));
+					settingsButton.setIcon(new ImageIcon(settings_img_dark));
 				} else {
 					contentPane.setBackground(null);
 					toggleButton.setIcon(new ImageIcon(toggle_on_img));
+					settingsButton.setIcon(new ImageIcon(settings_img));
 					backLabel.setForeground(new Color(255, 255, 255));
 					contentPane.setBackground(new Color(11, 28, 53));
 					settingsButton.setBackground(new Color(11, 28, 53));
