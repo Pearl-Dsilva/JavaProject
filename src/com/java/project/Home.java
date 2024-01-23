@@ -88,7 +88,11 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Home.this.setVisible(false);
-				AddPassword.startAddPasswordScreen(() -> Home.this.setVisible(true));
+				AddPassword.startAddPasswordScreen(() -> {
+					Home.this.setVisible(true);
+					cardsPanel.removeAll();
+					initialLoad(cardsPanel);
+				});
 			}
 		});
 		addButton.setBackground(new Color(11, 28, 53));
@@ -129,11 +133,12 @@ public class Home extends JFrame {
 	}
 
 	public void addPasswordEntry(JPanel panel, DataModel data) {
-		JPanel dummy = new JPanel();
-		dummy.setBackground(new Color(11, 28, 53));
+		JPanel panelContent = new JPanel();
+		panelContent.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelContent.setBackground(new Color(11, 28, 53));
 
-		dummy.setMaximumSize(new Dimension(9900, 100));
-		dummy.setLayout(new BoxLayout(dummy, BoxLayout.X_AXIS));
+		panelContent.setMaximumSize(new Dimension(9900, 100));
+		panelContent.setLayout(new BoxLayout(panelContent, BoxLayout.X_AXIS));
 
 		JPanel item = new JPanel();
 		item.setBorder(new LineBorder(new Color(255, 255, 255), 2, true));
@@ -153,7 +158,7 @@ public class Home extends JFrame {
 		websiteName.setAlignmentX(Component.LEFT_ALIGNMENT);
 		websiteName.setForeground(new Color(255, 255, 255));
 		websiteName.setBackground(new Color(11, 28, 53));
-		dummy.add(item);
+		panelContent.add(item);
 
 		JPanel websiteControlsPanel = new JPanel();
 		websiteControlsPanel.setBackground(new Color(11, 28, 53));
@@ -201,7 +206,7 @@ public class Home extends JFrame {
 		websiteControlsPanel.add(Box.createHorizontalGlue());
 
 		item.add(websiteControlsPanel);
-		panel.add(dummy);
+		panel.add(panelContent);
 		panel.repaint();
 		panel.revalidate();
 	}

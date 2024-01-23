@@ -26,11 +26,9 @@ public class JDBCHelper {
 
 			while (rs.next()) {
 				try {
-//					String encryptedPassword = new Encryption().encrypt("Hello");
-//					String decryptedPassword = new Encryption().decrypt(encryptedPassword);					
-//					System.out.println(decryptedPassword);
+					String decryptedPassword = new Encryption().decrypt(rs.getString("password"));
 					DataModel dataModel = new DataModel(rs.getInt("id"), rs.getString("url"), rs.getString("username"),
-							"Sample Password");
+							decryptedPassword);
 
 					results.add(dataModel);
 				} catch (Exception ex) {
