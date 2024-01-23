@@ -72,6 +72,7 @@ public class Login extends JFrame {
 		jLabel2 = new JLabel();
 		jButton2 = new JButton();
 
+
 		setTitle("Password Manager");
 		setPreferredSize(new Dimension(800, 500));
 
@@ -84,7 +85,6 @@ public class Login extends JFrame {
 		jPanel2.setPreferredSize(new Dimension(400, 500));
 
 		jLabel3.setFont(new Font("Tahoma", 1, 24));
-//		jLabel3.setForeground(new Color(153, 153, 153));
 		jLabel3.setBackground(new Color(0, 255, 0));
 		jLabel3.setIcon(new ImageIcon("/add.png"));
 
@@ -150,11 +150,12 @@ public class Login extends JFrame {
 		jButton2.setFont(new Font("Tahoma", 0, 12));
 		jButton2.setForeground(new Color(0, 153, 51));
 		jButton2.setText("Sign up");
-//        jButton2.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                jButton2ActionPerformed(e);
-//            }
-//        });
+
+		jButton2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				SignupbuttonMouseClicked(evt);
+			}
+		});
 
 		GroupLayout leftLayout = new GroupLayout(left);
 		left.setLayout(leftLayout);
@@ -230,7 +231,12 @@ public class Login extends JFrame {
 
 	private void SigninbuttonMouseClicked(MouseEvent e) {
 	}
-
+	
+	private void SignupbuttonMouseClicked(MouseEvent e) {
+		SignUp.main(null);
+		this.dispose();
+		
+	}
 	private void SigninbuttonActionPerformed(ActionEvent evt) {
 		String username = jTextField2.getText();
 		String password = jTextField3.getText();

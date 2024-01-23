@@ -14,7 +14,7 @@ import com.java.encryption.Encryption;
  * CREATE TABLE users_details (uid INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL);
  * SELECT * FROM users_details;
  * 
- * CREATE TABLE passwordManager (id INT PRIMARY KEY AUTO_INCREMENT, url VARCHAR(255) ,username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
+ * CREATE TABLE passwordManager ( id INT PRIMARY KEY AUTO_INCREMENT, uid INT, url VARCHAR(255), PersonID int, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, FOREIGN KEY (uid) REFERENCES users_details(uid) );
  */
 
 

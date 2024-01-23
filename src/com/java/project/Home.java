@@ -114,12 +114,12 @@ public class Home extends JFrame {
 		contentPane.add(addButton);
 
 		JButton settingsButton = new JButton("");
-		settingsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// goes to settings page
+		settingsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				settingsButtonClicked(e);
 			}
 		});
+
 		settingsButton.setBounds(55, 46, 50, 50);
 		settingsButton.setForeground(new Color(0, 0, 0));
 		settingsButton.setBackground(new Color(11, 28, 53));
@@ -262,5 +262,10 @@ public class Home extends JFrame {
 		StringSelection strse1 = new StringSelection(text);
 		clip.setContents(strse1, strse1);
 		JOptionPane.showMessageDialog(this, textType + " copied!");
+	}
+	
+	private void settingsButtonClicked(ActionEvent e) {
+		Settings.main(null);
+		this.dispose();
 	}
 }
