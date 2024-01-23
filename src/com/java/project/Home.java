@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,9 +23,9 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import com.java.database.DataModel;
 import com.java.database.JDBCHelper;
 import com.java.util.UtilFunctions;
+
 import java.awt.Component;
 import javax.swing.border.LineBorder;
-import java.awt.Rectangle;
 
 public class Home extends JFrame {
 
@@ -181,6 +184,7 @@ public class Home extends JFrame {
 		userNameCopyButton.setBackground(new Color(11, 28, 53));
 		userNameCopyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				copyToClipBoard(data.getUsername(), "username");
 			}
 		});
 		userNameCopyButton.setIcon(new ImageIcon(
@@ -201,6 +205,12 @@ public class Home extends JFrame {
 		passwordCopyButton.setBackground(new Color(11, 28, 53));
 		passwordCopyButton.setIcon(new ImageIcon(
 				UtilFunctions.loadImageIcon("/copy.png").getImage().getScaledInstance(25, 25, DO_NOTHING_ON_CLOSE)));
+		passwordCopyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				copyToClipBoard(data.getPassword(), "password");
+			}
+		});
 		passwordPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		passwordPanel.add(userPassword);
@@ -211,6 +221,28 @@ public class Home extends JFrame {
 		websiteControlsPanel.add(passwordPanel);
 		websiteControlsPanel.add(Box.createHorizontalGlue());
 
+		JButton editButton = new JButton();
+		editButton.setBorder(null);
+		editButton.setBackground(new Color(11, 28, 53));
+		editButton.setIcon(new ImageIcon(UtilFunctions.loadImageIcon("/edit.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		editButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		websiteControlsPanel.add(editButton);
+		JButton deleteButton = new JButton();
+		deleteButton.setBorder(null);
+		deleteButton.setBackground(new Color(11, 28, 53));
+		deleteButton.setIcon(new ImageIcon(UtilFunctions.loadImageIcon("/delete.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		deleteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		websiteControlsPanel.add(deleteButton);
 		item.add(websiteControlsPanel);
 		panel.add(panelContent);
 		panel.repaint();
@@ -223,5 +255,12 @@ public class Home extends JFrame {
 		data.forEach((item) -> {
 			addPasswordEntry(cardsPanel, item);
 		});
+	}
+
+	private void copyToClipBoard(String text, String textType) {
+		Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+		StringSelection strse1 = new StringSelection(text);
+		clip.setContents(strse1, strse1);
+		JOptionPane.showMessageDialog(this, textType + " copied!");
 	}
 }
