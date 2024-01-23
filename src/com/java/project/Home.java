@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -33,7 +34,7 @@ public class Home extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchText;
 	private JPanel cardsPanel;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -231,22 +232,36 @@ public class Home extends JFrame {
 		JButton editButton = new JButton();
 		editButton.setBorder(null);
 		editButton.setBackground(new Color(11, 28, 53));
-		editButton.setIcon(new ImageIcon(UtilFunctions.loadImageIcon("/edit.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		editButton.setIcon(new ImageIcon(
+				UtilFunctions.loadImageIcon("/edit.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
 		editButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				DataModel updatedValues = updateEntry(data.getId(), data.getUrl(), data.getUsername(),
+						data.getPassword());
+				if (updatedValues != null) {
+					JDBCHelper.update(updatedValues);
+					cardsPanel.removeAll();
+					cardsPanel.repaint();
+					cardsPanel.revalidate();
+					initialLoad(cardsPanel);
+				}
 			}
 		});
 		websiteControlsPanel.add(editButton);
 		JButton deleteButton = new JButton();
 		deleteButton.setBorder(null);
 		deleteButton.setBackground(new Color(11, 28, 53));
-		deleteButton.setIcon(new ImageIcon(UtilFunctions.loadImageIcon("/delete.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		deleteButton.setIcon(new ImageIcon(
+				UtilFunctions.loadImageIcon("/delete.png").getImage().getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
 		deleteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				int res = JDBCHelper.delete(data.getId());
+				cardsPanel.removeAll();
+				cardsPanel.repaint();
+				cardsPanel.revalidate();
+				initialLoad(cardsPanel);
 			}
 		});
 		websiteControlsPanel.add(deleteButton);
@@ -277,4 +292,33 @@ public class Home extends JFrame {
 		clip.setContents(strse1, strse1);
 		JOptionPane.showMessageDialog(this, textType + " copied!");
 	}
+
+	private DataModel updateEntry(int id, String url, String username, String password) {
+		JTextField field1 = new JTextField(url);
+		JTextField field2 = new JTextField(username);
+		JTextField field3 = new JTextField(password);
+
+		JPanel panel = new JPanel(new GridLayout(3, 2));
+		panel.add(new JLabel("Url:"));
+		panel.add(field1);
+		panel.add(new JLabel("Psername:"));
+		panel.add(field2);
+		panel.add(new JLabel("Password:"));
+		panel.add(field3);
+
+		int result = JOptionPane.showConfirmDialog(this, panel, "Update Entry", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE);
+
+		if (result == JOptionPane.OK_OPTION) {
+			DataModel input = new DataModel();
+			input.setId(id);
+			input.setUrl(field1.getText());
+			input.setUsername(field2.getText());
+			input.setPassword(field3.getText());
+			return input;
+		} else {
+			return null; // Dialog canceled
+		}
+	}
+
 }

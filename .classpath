@@ -7,7 +7,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Pearl/Downloads/mysql-connector-j-8.0.33.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Pearl/Downloads/jakarta.xml.bind-api-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kenny/Downloads/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kenny/Downloads/jakarta.xml.bind-api-4.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

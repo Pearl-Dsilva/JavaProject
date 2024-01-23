@@ -13,6 +13,11 @@ public class DataModel {
 	}
 
 
+	public DataModel() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getId() {
 		return Id;
 	}

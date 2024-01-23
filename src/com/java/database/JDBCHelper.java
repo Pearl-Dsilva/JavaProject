@@ -22,7 +22,7 @@ public class JDBCHelper {
 
 	private static final String DB_URL = "jdbc:mysql://localhost/Vault";
 	private static final String USER = "root";
-	private static final String PASS = "Zombie@2347245";
+	private static final String PASS = "root";
 	private static final String TABLE_NAME = "passwordManager";
 
 	static final String[] columnNames = { "id", "url", "username", "password" };
