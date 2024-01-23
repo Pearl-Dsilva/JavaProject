@@ -8,58 +8,42 @@ import jakarta.xml.bind.DatatypeConverter;
 
 public class Encryption {
 
-    private static final String AES_CIPHER_ALGORITHM = "AES/CBC/PKCS5PADDING";
+	private static final String AES_CIPHER_ALGORITHM = "AES/CBC/PKCS5PADDING";
 
-    private SecretKey symmetricKey;
-    private static final byte[] FIXED_IV = DatatypeConverter.parseHexBinary("00112233445566778899AABBCCDDEEFF");
+	private SecretKey symmetricKey;
+	private static final byte[] FIXED_IV = DatatypeConverter.parseHexBinary("00112233445566778899AABBCCDDEEFF");
 
-    public Encryption() throws Exception {
-        this.symmetricKey = createAESKey();
-    }
+	public Encryption() throws Exception {
+		this.symmetricKey = createAESKey();
+	}
 
-    public String encrypt(String plainText) throws Exception {
-        byte[] cipherText = performEncryption(plainText);
-        return DatatypeConverter.printHexBinary(cipherText);
-    }
+	public String encrypt(String plainText) throws Exception {
+		byte[] cipherText = performEncryption(plainText);
+		return DatatypeConverter.printHexBinary(cipherText);
+	}
 
-    public String decrypt(String cipherTextHex) throws Exception {
-        byte[] cipherText = DatatypeConverter.parseHexBinary(cipherTextHex);
-        return performDecryption(cipherText);
-    }
+	public String decrypt(String cipherTextHex) throws Exception {
+		byte[] cipherText = DatatypeConverter.parseHexBinary(cipherTextHex);
+		return performDecryption(cipherText);
+	}
 
-    private SecretKey createAESKey() throws Exception {
-        byte[] keyBytes = DatatypeConverter.parseHexBinary("00112233445566778899AABBCCDDEEFF");
-        return new SecretKeySpec(keyBytes, "AES");
-    }
+	private SecretKey createAESKey() throws Exception {
+		byte[] keyBytes = DatatypeConverter.parseHexBinary("00112233445566778899AABBCCDDEEFF");
+		return new SecretKeySpec(keyBytes, "AES");
+	}
 
-    private byte[] performEncryption(String plainText) throws Exception {
-        Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(FIXED_IV);
-        cipher.init(Cipher.ENCRYPT_MODE, symmetricKey, ivParameterSpec);
-        return cipher.doFinal(plainText.getBytes());
-    }
+	private byte[] performEncryption(String plainText) throws Exception {
+		Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
+		IvParameterSpec ivParameterSpec = new IvParameterSpec(FIXED_IV);
+		cipher.init(Cipher.ENCRYPT_MODE, symmetricKey, ivParameterSpec);
+		return cipher.doFinal(plainText.getBytes());
+	}
 
-    private String performDecryption(byte[] cipherText) throws Exception {
-        Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(FIXED_IV);
-        cipher.init(Cipher.DECRYPT_MODE, symmetricKey, ivParameterSpec);
-        byte[] result = cipher.doFinal(cipherText);
-        return new String(result);
-    }
-
-    // Driver code
-    public static void main(String args[]) throws Exception {
-        Encryption encryption = new Encryption();
-
-        String plainText = "This is the message I want to encrypt.";
-
-        String cipherText = encryption.encrypt(plainText);
-
-        System.out.println("The ciphertext or Encrypted Message is: " + cipherText);
-
-        // Decrypting the encrypted message
-        String decryptedText = encryption.decrypt(cipherText);
-
-        System.out.println("Your original message is: " + decryptedText);
-    }
+	private String performDecryption(byte[] cipherText) throws Exception {
+		Cipher cipher = Cipher.getInstance(AES_CIPHER_ALGORITHM);
+		IvParameterSpec ivParameterSpec = new IvParameterSpec(FIXED_IV);
+		cipher.init(Cipher.DECRYPT_MODE, symmetricKey, ivParameterSpec);
+		byte[] result = cipher.doFinal(cipherText);
+		return new String(result);
+	}
 }

@@ -13,14 +13,16 @@ import com.java.encryption.Encryption;
  * USE Vault;
  * CREATE TABLE users_details (uid INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL);
  * SELECT * FROM users_details;
+ * 
+ * CREATE TABLE passwordManager (id INT PRIMARY KEY AUTO_INCREMENT, url VARCHAR(255) ,username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
  */
 
 
 public class JDBCHelper {
 
-	private static final String DB_URL = "jdbc:mysql://localhost/javaproject";
+	private static final String DB_URL = "jdbc:mysql://localhost/Vault";
 	private static final String USER = "root";
-	private static final String PASS = "root";
+	private static final String PASS = "Zombie@2347245";
 	private static final String TABLE_NAME = "passwordManager";
 
 	static final String[] columnNames = { "id", "url", "username", "password" };
