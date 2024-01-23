@@ -32,9 +32,15 @@ public class JDBCHelper {
 				ResultSet rs = conn.createStatement().executeQuery(QUERY)) {
 
 			while (rs.next()) {
-				DataModel dataModel = new DataModel(rs.getInt("id"), rs.getString("url"), rs.getString("username"),
-						rs.getString("password"));
-				results.add(dataModel);
+				try {
+					String decryptedPassword = new Encryption().decrypt(rs.getString("password"));
+					DataModel dataModel = new DataModel(rs.getInt("id"), rs.getString("url"), rs.getString("username"),
+							decryptedPassword);
+
+					results.add(dataModel);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 
 		} catch (SQLException e) {
@@ -105,22 +111,20 @@ public class JDBCHelper {
 	}
 
 	// Example usage
-	public static void main(String[] args) {
-
-		ArrayList<DataModel> databaseContent = read();
-		
-		// Insert Example using DataModel
-		DataModel newDataModel = new DataModel(1, "oldURL", "oldUsername", "oldPassword");
-		int insertedRows = insert(newDataModel);
-		System.out.println("Inserted Rows: " + insertedRows);
-
-		// Update Example using DataModel
-		DataModel updatedDataModel = new DataModel(2, "newURL", "newUsername", "newPassword");
-		int updatedRows = update(updatedDataModel);
-		System.out.println("Updated Rows: " + updatedRows);
-
-		// Delete Example
-		int deletedRows = delete(1);
-		System.out.println("Deleted Rows: " + deletedRows);
-	}
+//	public static void main(String[] args) {
+//
+//		ArrayList<DataModel> databaseContent = read();// Insert Example using DataModel
+//		DataModel newDataModel = new DataModel(1, "oldURL", "oldUsername", "oldPassword");
+//		int insertedRows = insert(newDataModel);
+//		System.out.println("Inserted Rows: " + insertedRows);
+//
+//		// Update Example using DataModel
+//		DataModel updatedDataModel = new DataModel(2, "newURL", "newUsername", "newPassword");
+//		int updatedRows = update(updatedDataModel);
+//		System.out.println("Updated Rows: " + updatedRows);
+//
+//		// Delete Example
+//		int deletedRows = delete(1);
+//		System.out.println("Deleted Rows: " + deletedRows);
+//	}
 }
