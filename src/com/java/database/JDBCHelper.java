@@ -8,6 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.java.encryption.Encryption;
+/**
+ * CREATE DATABASE Vault;
+ * USE Vault;
+ * CREATE TABLE users_details (uid INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL);
+ * SELECT * FROM users_details;
+ */
+
 
 public class JDBCHelper {
 

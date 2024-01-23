@@ -46,6 +46,12 @@ public class Home extends JFrame {
 		});
 	}
 
+	public void navigateToAddPassword() {
+		AddPassword.startAddPasswordScreen(() -> {
+			Home.this.setVisible(true);
+		});
+	}
+
 	public Home() {
 		ImageIcon appIcon = UtilFunctions.loadImageIcon("/app_icon.png");
 		Color themeColor = new Color(11, 28, 53);
@@ -234,5 +240,4 @@ public class Home extends JFrame {
 			addPasswordEntry(panel, item);
 		});
 	}
-
 }

@@ -231,9 +231,7 @@ public class Login extends JFrame {
 		String password = jTextField3.getText();
 
 		if (authenticateUser(username, password)) {
-			Home.startAddPasswordScreen(() -> {
-				Login.this.setVisible(true);
-			});
+			Home.main(null);
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this, "Invalid username or password", "Login Error",
@@ -243,7 +241,7 @@ public class Login extends JFrame {
 
 	private boolean authenticateUser(String username, String password) {
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/User", "root", "64152737");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root", "Zombie@2347245");
 			String query = "SELECT * FROM users_details WHERE username = ? AND password = ?";
 			PreparedStatement pst = conn.prepareStatement(query);
 			pst.setString(1, username);
