@@ -17,6 +17,7 @@ import javax.swing.plaf.basic.BasicButtonUI;
 
 import com.java.database.DataModel;
 import com.java.database.JDBCHelper;
+import com.java.util.UtilFunctions;
 
 import java.awt.Color;
 
@@ -52,8 +53,8 @@ public class AddPassword extends JFrame {
 	}
 
 	private AddPassword() {
-		ImageIcon appIcon = loadImageIcon("/app_icon.png");
-		ImageIcon backArrow = loadImageIcon("/back_icon.png");
+		ImageIcon appIcon = UtilFunctions.loadImageIcon("/app_icon.png");
+		ImageIcon backArrow = UtilFunctions.loadImageIcon("/back_icon.png");
 
 		this.setIconImage(appIcon.getImage());
 		this.setTitle("Password Manager");
@@ -228,7 +229,6 @@ public class AddPassword extends JFrame {
 		});
 
 		contentPanel.add(saveButton, saveButtonGridBagConstraints);
-
 		contentPane.add(contentPanel, contentPanelConstraints);
 
 		setContentPane(contentPane);
@@ -236,22 +236,7 @@ public class AddPassword extends JFrame {
 
 	private void closeWindow() {
 		dispose_after.callOnDispose();
-		AddPassword.this.dispose();		
-	}
-	
-	private static ImageIcon loadImageIcon(String path) {
-		URL imageURL = AddPassword.class.getResource(path);
-
-		if (imageURL != null) {
-			try {
-				BufferedImage image = ImageIO.read(imageURL);
-				return new ImageIcon(image);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return null;
+		AddPassword.this.dispose();
 	}
 
 }
