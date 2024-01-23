@@ -72,7 +72,6 @@ public class Login extends JFrame {
 		jLabel2 = new JLabel();
 		jButton2 = new JButton();
 
-
 		setTitle("Password Manager");
 		setPreferredSize(new Dimension(800, 500));
 
@@ -231,12 +230,13 @@ public class Login extends JFrame {
 
 	private void SigninbuttonMouseClicked(MouseEvent e) {
 	}
-	
+
 	private void SignupbuttonMouseClicked(MouseEvent e) {
 		SignUp.main(null);
 		this.dispose();
-		
+
 	}
+
 	private void SigninbuttonActionPerformed(ActionEvent evt) {
 		String username = jTextField2.getText();
 		String password = jTextField3.getText();
@@ -252,7 +252,8 @@ public class Login extends JFrame {
 
 	private boolean authenticateUser(String username, String password) {
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root", "Zombie@2347245");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vault", "root",
+					"root");
 			String query = "SELECT * FROM users_details WHERE username = ? AND password = ?";
 			PreparedStatement pst = conn.prepareStatement(query);
 			pst.setString(1, username);
