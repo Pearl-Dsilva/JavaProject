@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
@@ -45,10 +48,9 @@ public class Settings extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		JButton settingsButton = new JButton("");
-		settingsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// go back to home
+		settingsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				settingsButtonClicked(e);
 			}
 		});
 		settingsButton.setVerticalAlignment(SwingConstants.TOP);
@@ -56,10 +58,10 @@ public class Settings extends JFrame {
 		settingsButton.setBounds(55, 46, 100, 100);
 		settingsButton.setForeground(new Color(0, 0, 0));
 		settingsButton.setBackground(new Color(11, 28, 53));
-		Image settings_img = new ImageIcon(this.getClass().getResource("/back_icon.png")).getImage().getScaledInstance(100,
-				100, DO_NOTHING_ON_CLOSE);
-		Image settings_img_dark = new ImageIcon(this.getClass().getResource("/back_dark.png")).getImage().getScaledInstance(100,
-				100, DO_NOTHING_ON_CLOSE);
+		Image settings_img = new ImageIcon(this.getClass().getResource("/back_icon.png")).getImage()
+				.getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
+		Image settings_img_dark = new ImageIcon(this.getClass().getResource("/back_dark.png")).getImage()
+				.getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
 		settingsButton.setIcon(new ImageIcon(settings_img));
 		settingsButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		settingsButton.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -127,5 +129,10 @@ public class Settings extends JFrame {
 			}
 		});
 		contentPane.add(toggleButton);
+	}
+
+	private void settingsButtonClicked(ActionEvent e) {
+		Home.main(null);
+		this.dispose();
 	}
 }

@@ -1,7 +1,11 @@
 package com.java.project;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -60,15 +64,15 @@ public class SignUp extends JFrame {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SignUp");
-		setPreferredSize(new java.awt.Dimension(800, 500));
+		setPreferredSize(new  Dimension(800, 500));
 
-		jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-		jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-		jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
+		jPanel1.setBackground(new  Color(255, 255, 255));
+		jPanel1.setForeground(new  Color(255, 255, 255));
+		jPanel1.setPreferredSize(new  Dimension(800, 500));
 		jPanel1.setLayout(null);
 
-		jPanel2.setBackground(new java.awt.Color(11, 28, 53));
-		jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
+		jPanel2.setBackground(new  Color(11, 28, 53));
+		jPanel2.setPreferredSize(new  Dimension(400, 500));
 
 		jLabel3.setIcon(new ImageIcon("/add.png"));
 		jLabel3.setText("jLabel3");
@@ -86,54 +90,54 @@ public class SignUp extends JFrame {
 		jPanel1.add(jPanel2);
 		jPanel2.setBounds(0, 0, 400, 500);
 
-		jPanel3.setBackground(new java.awt.Color(16, 28, 70));
-		jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
+		jPanel3.setBackground(new  Color(16, 28, 70));
+		jPanel3.setPreferredSize(new  Dimension(400, 500));
 
-		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24));
-		jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+		jLabel1.setFont(new  Font("Tahoma", 1, 24));
+		jLabel1.setForeground(new  Color(255, 255, 255));
 		jLabel1.setText("Sign Up");
 
-		jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12));
+		jTextField1.setFont(new  Font("Tahoma", 0, 12));
 		jTextField1.setText("Name");
-		jTextField1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
+		jTextField1.addActionListener(new  ActionListener() {
+			public void actionPerformed( ActionEvent e) {
 				jTextField1ActionPerformed(e);
 			}
 		});
 
-		jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12));
+		jTextField2.setFont(new  Font("Tahoma", 0, 12));
 		jTextField2.setText("Confirm  Password");
-		jTextField2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
+		jTextField2.addActionListener(new ActionListener() {
+			public void actionPerformed( ActionEvent e) {
 				jTextField2ActionPerformed(e);
 			}
 		});
 
-		jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12));
+		jTextField3.setFont(new  Font("Tahoma", 0, 12));
 		jTextField3.setText("Password");
-		jTextField3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
+		jTextField3.addActionListener(new  ActionListener() {
+			public void actionPerformed( ActionEvent e) {
 				jTextField3ActionPerformed(e);
 			}
 		});
 
-		jLabel2.setForeground(new java.awt.Color(0, 153, 51));
+		jLabel2.setForeground(new  Color(0, 153, 51));
 		jLabel2.setText("Already have an account?");
 
-		jButton1.setBackground(new java.awt.Color(16, 28, 70));
-		jButton1.setFont(new java.awt.Font("Tahoma", 0, 10));
-		jButton1.setForeground(new java.awt.Color(0, 153, 51));
+		jButton1.setBackground(new  Color(16, 28, 70));
+		jButton1.setFont(new  Font("Tahoma", 0, 10));
+		jButton1.setForeground(new  Color(0, 153, 51));
 		jButton1.setText("Sign in");
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
+		jButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				jButton1ActionPerformed(e);
 			}
 		});
 
-		jButton2.setFont(new java.awt.Font("Tahoma", 0, 12));
+		jButton2.setFont(new  Font("Tahoma", 0, 12));
 		jButton2.setText("Sign Up");
-		jButton2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton2ActionPerformed(evt);
 			}
 		});
@@ -201,16 +205,16 @@ public class SignUp extends JFrame {
 		pack();
 	}
 
-	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jTextField1ActionPerformed(ActionEvent evt) {
 	}
 
-	private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jTextField2ActionPerformed(ActionEvent evt) {
 	}
 
-	private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jTextField3ActionPerformed(ActionEvent evt) {
 	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jButton1ActionPerformed(ActionEvent evt) {
 		Login LoginFrame = new Login();
 		LoginFrame.setVisible(true);
 		LoginFrame.pack();
@@ -218,7 +222,7 @@ public class SignUp extends JFrame {
 		this.dispose();
 	}
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jButton2ActionPerformed( ActionEvent evt) {
 		String username = jTextField1.getText();
 		String password = jTextField3.getText();
 		String confirmPassword = jTextField2.getText();
